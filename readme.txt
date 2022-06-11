@@ -4,6 +4,6 @@ I was checking how it works with my friend to be sure that it won't fail working
 It was saying that we can't SELECT and UPDATE at the same time, I was trying to fix it but it caused more problems than before so I left it like this, at least it works on my PC.
 
 
-P.S. unpack the folder "marvel website" itself in your htdocs but not the content inside. 
-
+P.S. If you use xampp, unpack the folder "marvel website" itself in your htdocs but not the content inside. 
+P.S.S One of my earlier projects.
 whitecoldd.
