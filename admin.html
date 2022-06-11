@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style1.css">
+    <title>Admin Page</title>
+    <link rel="icon" type="image/x-icon" href="./pics/fav.png">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light nav-bg">
+        <a class="navbar-brand" href="./index.html"><img src="./pics/logo1.png" class="brand-dev img-fluid float-left rounded logosize" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto ">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html"><span class="textcolor text-uppercase">Home</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#carouselExampleCaptions"><span class="textcolor text-uppercase">Chronology</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#heroes"><span class="textcolor text-uppercase">Heroes</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./admin.html"><span class="textcolor text-uppercase">Administration</span></a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+        <div class="container fixes">
+          <h2 class="text-center">Marvel Heroes</h2>
+            <div class="row">
+                <form id="postHerobyC" class="col-md-6 mx-auto">
+                <div class="form-group">
+                    <label for="hero-logo">Hero Logo</label>
+                    <input id="hero-logo" name="hero-logo" class="form-control-file" type="file">
+                </div>
+                <div class="form-group">
+                    <label for="hero-name">Full Name</label>
+                    <input id="hero-name" name="hero-name" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="hero-pseudo">Pseudoname</label>
+                    <input id="hero-pseudo" name="hero-pseudo" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="powers-abilities">Powers and Abilities</label>
+                    <input id="powers-abilities" name="powers-abilities" class="form-control" type="text">
+                </div>
+                <button class="btn btn-fixes" type="submit" id="add-hero">Add Hero</button>
+                <button class="btn btn-outline-fixes" type="button" id="get-hero">Get Heroes</button>
+                <br>
+                <br>
+                <button class="btn btn-fixes" type="button" id="get-table">Refresh the Table</button>
+                </form>
+                <form id="updateorDeleteHerobyC" class="col-md-6 mx-auto">
+                <div class="form-group">
+                    <label for="hero-logo1">Hero Logo</label>
+                    <input id="hero-logo1" name="hero-logo1" class="form-control-file" type="file">
+                </div>
+                <div class="form-group">
+                    <label for="hero-name1">Full Name</label>
+                    <input id="hero-name1" name="hero-name1" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="hero-pseudo1">Pseudoname</label>
+                    <input id="hero-pseudo1" name="hero-pseudo1" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="powers-abilities1">Powers and Abilities</label>
+                    <input id="powers-abilities1" name="powers-abilities1" class="form-control" type="text">
+                </div>
+                <button class="btn btn-fixes" type="submit" id="update-hero">Update Last Hero</button>
+                <button class="btn btn-outline-fixes" type="button" id="delete-hero">Delete Last Hero</button>
+            </form>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="mx-auto">
+                <table id="heroes">
+                    <tr>
+                        <th>Hero ID </th>
+                        <th>Hero Logo </th>
+                        <th>Hero Name </th>
+                        <th>Hero Pseudoname </th>
+                        <th>Powers and Abilities </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+      document.getElementById('postHerobyC').addEventListener('submit', addHero);
+      document.getElementById('get-hero').addEventListener('click', getHeroes);
+      document.getElementById('get-table').addEventListener('click', getRefresh);
+      document.getElementById('updateorDeleteHerobyC').addEventListener('submit', updateHero);
+      document.getElementById('delete-hero').addEventListener('click', deleteHeroes);
+
+
+        function addHero(event){
+            event.preventDefault();
+
+            var logo=document.getElementById('hero-logo').value;
+            var name=document.getElementById('hero-name').value;
+            var pseudo=document.getElementById('hero-pseudo').value;
+            var power=document.getElementById('powers-abilities').value;
+            var data = `logo=${logo}&name=${name}&pseudo=${pseudo}&power=${power}`;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', 'http://localhost/marvel%20website/heroadd.php', true);
+            xhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+            xhttp.send(data);
+        }
+
+        function addHeroToDOM(element, table) {
+            var item = document.createElement('tr');
+            item.innerHTML = `
+                <td> ${element.hero_id} </td>
+                <td> ${element.hero_logo} </td>
+                <td> ${element.hero_name} </td>
+                <td> ${element.hero_pseudo} </td>
+                <td> ${element.power_ab} </td>
+            `;
+            table.appendChild(item, table);
+        }
+        
+        function getHeroes(){
+            console.log('---- getHeroes() have been called ----');
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('GET', 'http://localhost/marvel%20website/heroget.php', true);
+            xhttp.onload = function() {
+                if(this.status == 200) {
+                    var result = JSON.parse(this.responseText);
+                    var heroes = document.getElementById("heroes");
+                    for(var i = 0; i < result.length; i++) {
+                        addHeroToDOM(result[i], heroes);                     
+                        }
+                  } 
+                else if(this.status == 404 || this.status == 403) {
+                    alert("The page is not found!");
+                }
+                else {
+                    alert("Some problem occured!", this.status);
+                }
+            }
+            xhttp.send();
+        }
+
+        function getRefresh(){
+          window.top.location.reload(true);
+        }
+
+        function updateHero(evt){
+             evt.preventDefault();
+             console.log('---- updateHeroes() have been called ----');
+
+             var logo1=document.getElementById('hero-logo1').value;
+             var name1=document.getElementById('hero-name1').value;
+             var pseudo1=document.getElementById('hero-pseudo1').value;
+             var power1=document.getElementById('powers-abilities1').value;
+             var datas = `logo1=${logo1}&name1=${name1}&pseudo1=${pseudo1}&power1=${power1}`;
+             var xhttp = new XMLHttpRequest();
+             xhttp.open('POST', 'http://localhost/marvel%20website/heroput.php', true);
+             xhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+             xhttp.send(datas);
+         }
+
+   
+
+
+
+        function deleteHeroes(){
+            //e.preventDefault();
+
+            console.log('---- deleteHeroes() have been called ----');
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('DELETE', 'http://localhost/marvel%20website/herodelete.php', true);
+            xhttp.send();
+          }
+
+          function deleteHeroFromDOM() { 
+            var item = document.getElementById('heroes');
+            item.parentNode.removeChild(item);
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+</body>
+</html>

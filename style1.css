@@ -1,0 +1,59 @@
+html, body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(46, 42, 42, 0.877);
+    color: whitesmoke;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+  }
+
+.textcolor{
+    color: whitesmoke;
+}
+.logosize{
+    height: auto;
+    width: 130px;
+}
+.gallery-pic{
+    margin: 0 0 0 0 ;
+    padding: 0px 0px 0px 0px;
+}
+
+.image:hover{
+    opacity: 0.9;
+    transition: 0.5s;
+}
+
+.nav-bg{
+    background-color: rgb(163, 0, 0);
+}
+
+.brand-dev:hover{
+    box-shadow: 2px 2px 0px rgb(255, 255, 255);
+    transition: 0.5s;
+    transform: translate3d(-2px, -2px, 0);
+}
+
+.fixes{
+    background-color: rgba(46, 42, 42, 0.877);
+    padding-top: 20px;
+}
+
+.btn-fixes{
+    color: whitesmoke;
+    background-color: #a80900;
+    border-color: none;
+}
+
+.btn-outline-fixes{
+    color: #a80900;
+    border-color: #a80900;
+}
+
+.btn-outline-fixes:hover{
+    color: aliceblue;
+    background-color: #ad0900;
+}
